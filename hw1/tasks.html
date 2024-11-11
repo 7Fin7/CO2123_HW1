@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Homework 1: Tasks for fl130</title>
+</head>
+
+<body>
+<h1>Homework 1: Tasks for fl130</h1>
+
+<p>Your personal task is to develop a system for markets and their stalls.</p>
+
+<h2>Task 1: Configuration [4 marks]</h2>
+<p>Configure the project to support the use of JSPs as view technology. JSPs must be configured to be placed inside folder <code>src/main/webapp/WEB-INF/views/</code>.</p>
+
+<h2>Task 2: Domain Classes [13 marks]</h2>
+
+<p>Create class <code>co2123.hw1.domain.Stall</code>. With the following private fields:
+<ol>
+  <li><code>String type</code></li>
+  <li><code>String owner</code></li>
+  <li><code>String products</code></li>
+  <li><code>int hours</code></li>
+</ol>
+Generate necessary getters and setters. [7 marks]
+</p>
+
+<p>Create class <code>co2123.hw1.domain.Market</code>. With the following private fields:
+<ol>
+  <li><code>int id</code></li>
+  <li><code>String name</code></li>
+  <li><code>String location</code></li>
+  <li><code>List&lt;Stall&gt; stalls</code></li>
+</ol>
+Generate necessary getters and setters. [6 marks]
+</p>
+
+
+<h2>Task 3: Controller (simple) [5 marks]</h2>
+<p>Create controller <code>co2123.hw1.controller.MainController</code> [2 marks].
+<ol>
+  <li>Requests for URL <code>"/"</code> (POST and GET) should show the view <code>start</code> (the corresponding JSP already exists). [3 marks]</li>
+</ol>
+</p>
+
+<h2>Task 4: Controller, View, and Form [20 marks]</h2>
+
+<p>Create field <code>public static List&lt;Market&gt; markets</code> in class <code>co2123.hw1.Hw1Application</code>. Initialize the list inside class <code>co2123.hw1.Hw1Application</code> to contain one market with two stalls. [4 marks]</p>
+
+<p>Create controller <code>co2123.hw1.controller.MarketController</code> and add methods with request mappings for the following behavior:
+<ol>
+  <li>GET requests for URL <code>"/markets"</code> should show view <code>markets/list</code>. [2 marks]
+    <ul>
+      <li>Add the list of all markets from <code>co2123.hw1.Hw1Application</code> to the model as attribute <code>markets</code>. [2 marks]</li>
+      <li>Create the corresponding JSP to list the name and location of each market followed by a link to URL <code>"/stalls?market={id of market}"</code>, e.g., <code>"/stalls?market=3"</code>. [4 marks]</li>
+    </ul>
+  </li>
+  <li>Requests for URL <code>"/newMarket"</code> should show view <code>markets/form</code>. [3 marks] Create the corresponding JSP with a form with <code>modelAttribute="market"</code> and <code>action="/addMarket"</code> and inputs for all fields of class <code>Market</code> except for <code>stalls</code>. [5 marks]</li>
+  <li>POST requests for URL <code>"/addMarket"</code> should add a new market to the list of all markets in <code>co2123.hw1.Hw1Application</code> and redirect to <code>/markets</code>. [3 marks]</li>
+</ol>
+</p>
+
+<h2>Task 5: Controller, View, and Form with additional Parameter [33 marks]</h2>
+
+<p>Create controller <code>co2123.hw1.controller.StallController</code> and add methods with request mappings for the following behavior:
+<ol>
+  <li>GET requests for URL <code>"/stalls"</code> should show view <code>stalls/list</code>. [2 marks]
+    <ul>
+      <li>Based on request parameter <code>market</code> determine the corresponding market from <code>co2123.hw1.Hw1Application</code>. [2 marks]</li>
+      <li>Add the list of all stalls of that market to the model as attribute <code>stalls</code>. [2 marks]</li>
+      <li>Create the corresponding JSP for the view to list the type, owner, products, and hours of each stall. [4 marks]</li>
+      <li>At the end of the list in the JSP add a link to URL <code>"/newStall?market={id of market whose stalls are listed}"</code>, e.g., <code>"/newStall?market=3"</code>. [4 marks]</li>
+    </ul>
+  </li>
+  <li>Requests for URL <code>"/newStall"</code> should show view <code>stalls/form</code>. [3 marks]
+    <ul>
+      <li>Create the corresponding JSP with a form with <code>modelAttribute="stall"</code> and <code>action="/addStall"</code> and inputs for all fields of class <code>Stall</code>. [6 marks]</li>
+      <li>Also add the request parameter <code>market</code> with the ID of the current market. [4 marks]</li>
+    </ul>
+  </li>
+  <li>POST requests for URL <code>"/addStall"</code> should add a new stall to the list of stalls of the market identified by request parameter <code>market</code> and then redirect to <code>/markets</code>. [6 marks]</li>
+</ol>
+</p>
+
+<h2>Task 6: Validation [25 marks]</h2>
+
+<p>Set up a validator for class <code>Market</code> and make it available in controller <code>MarketController</code>. [4 marks]</p>
+<p>When adding a new market validate that
+  <ol>
+    <li>The value of field <code>id</code> is unique within the list <code>Hw1Application.markets</code>. [3 marks]</li>
+    <li>The value of field <code>name</code> is not empty. [2 marks]</li>
+    <li>The value of field <code>location</code> is not empty. [2 marks]</li>
+  </ol>
+  In case of validation errors go back to the form and show error messages for each field in the form.
+</p>
+
+
+<p>Set up a validator for class <code>Stall</code> and make it available in controller <code>StallController</code>. [4 marks]</p>
+<p>When adding a new stall validate that
+  <ol>
+    <li>The value of field <code>type</code> is not empty. [2 marks]</li>
+    <li>The value of field <code>owner</code> is not empty. [2 marks]</li>
+    <li>The value of field <code>products</code> is either <code>"Fruit"</code>, <code>"Vegetables"</code>, or <code>"Flowers"</code>. [3 marks]</li>
+    <li>The value of field <code>hours</code> is between (including) 12 and 20. [3 marks]</li>
+  </ol>
+  In case of validation errors go back to the form and show error messages for each field in the form.
+</p>
+
+</body>
+
+</html>
