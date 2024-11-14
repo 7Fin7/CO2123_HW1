@@ -8,13 +8,13 @@
 <body>
     <form:form modelAttribute="market" action="/addMarket">
 
-        ID:
+        <form:label path="id">ID:</form:label>
         <form:input path="id"/><br/>
 
-        Name:
+        <form:label path="name">Name:</form:label>
         <form:input path="name"/><br/>
 
-        Location:
+        <form:label path="location">Location:</form:label>
         <form:input path="location"/><br/>
 
         <input type="submit" value="Submit">

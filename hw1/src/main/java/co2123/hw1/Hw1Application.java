@@ -42,10 +42,10 @@ public class Hw1Application implements CommandLineRunner {
 
         // Second Stall for Market
         Stall stall2 = new Stall();
-        stall1.setHours(10);
-        stall1.setOwner("Rudolph");
-        stall1.setProducts("Carrots");
-        stall1.setType("Food");
+        stall2.setHours(10);
+        stall2.setOwner("Rudolph");
+        stall2.setProducts("Carrots");
+        stall2.setType("Food");
         stallsList.add(stall2);
 
         // Associate stalls with market
