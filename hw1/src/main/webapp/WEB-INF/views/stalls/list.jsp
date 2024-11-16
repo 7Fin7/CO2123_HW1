@@ -17,7 +17,7 @@
     </c:forEach>
 
     <br>
-    <a href="/newStall?market=${market.getId()}"/>Add a new stall</a>
+    <a href="/newStall?market=${marketID}"/>Add a new stall</a>
 </ul>
 
 

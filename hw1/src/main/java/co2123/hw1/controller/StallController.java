@@ -29,6 +29,7 @@ public class StallController {
 
         if (selectedMarket != null) {
             model.addAttribute("stalls", selectedMarket.getStalls());
+            model.addAttribute("marketID", selectedMarket.getId());
         }
         return "stalls/list";
     }
