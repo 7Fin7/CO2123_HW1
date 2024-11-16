@@ -36,7 +36,7 @@ public class Hw1Application implements CommandLineRunner {
         Stall stall1 = new Stall();
         stall1.setHours(3);
         stall1.setOwner("Santa");
-        stall1.setProducts("Toys");
+        stall1.setProducts("Flowers");
         stall1.setType("Products");
         stallsList.add(stall1);
 
@@ -44,7 +44,7 @@ public class Hw1Application implements CommandLineRunner {
         Stall stall2 = new Stall();
         stall2.setHours(10);
         stall2.setOwner("Rudolph");
-        stall2.setProducts("Carrots");
+        stall2.setProducts("Vegetables");
         stall2.setType("Food");
         stallsList.add(stall2);
 
