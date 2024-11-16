@@ -9,15 +9,19 @@
     <form:form modelAttribute="market" action="/addMarket">
 
         <form:label path="id">ID:</form:label>
-        <form:input path="id"/><br/>
+        <form:input path="id"/>
+        <form:errors path="id"/><br/>
 
         <form:label path="name">Name:</form:label>
-        <form:input path="name"/><br/>
+        <form:input path="name"/>
+        <form:errors path="name"/><br/>
 
         <form:label path="location">Location:</form:label>
-        <form:input path="location"/><br/>
+        <form:input path="location"/>
+        <form:errors path="location"/><br/>
 
-        <input type="submit" value="Submit">
+        <input type="submit" value="Submit"/>
+        <form:errors/>
     </form:form>
 
 

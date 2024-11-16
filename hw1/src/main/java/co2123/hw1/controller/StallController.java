@@ -5,13 +5,16 @@ import co2123.hw1.domain.Market;
 import co2123.hw1.domain.Stall;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.*;
+import jakarta.validation.Valid;
 
 @Controller
 public class StallController {
+
+    @InitBinder
+    public void initBinder(WebDataBinder binder) { binder.addValidators(new StallValidator()); }
 
     @RequestMapping("/stalls")
     public String showStalls(@RequestParam int market, Model model) {
@@ -31,13 +34,19 @@ public class StallController {
     }
 
     @RequestMapping("/newStall")
-    public String newMarket(Model model) {
+    public String newStall(Model model) {
         model.addAttribute("stall", new Stall());
         return "stalls/form";
     }
 
     @PostMapping("/addStall")
-    public String submitNewMarket(@ModelAttribute Stall stall, @RequestParam int marketId) {
+    public String addStall(@Valid @ModelAttribute Stall stall, BindingResult bindingResult, @RequestParam(defaultValue = "-1") int marketId) {
+
+        // On error return
+        if (bindingResult.hasErrors()) {
+            return "stalls/form";
+        }
+
         Market market = null;
 
         for (Market m : Hw1Application.markets) {
@@ -50,7 +59,6 @@ public class StallController {
         if (market != null) {
             market.getStalls().add(stall);
         }
-
 
         return "redirect:/markets";
     }
