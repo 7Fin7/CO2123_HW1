@@ -47,12 +47,14 @@ public class StallController {
 
         // On error return
         if (bindingResult.hasErrors()) {
+            // Re-add marketId as attribute so it is displayed in view
             model.addAttribute("marketId", marketId);
             return "stalls/form";
         }
 
         Market market = null;
 
+        // Search for existing market
         for (Market m : Hw1Application.markets) {
             if (m.getId() == marketId) {
                 market = m;
@@ -60,6 +62,7 @@ public class StallController {
             }
         }
 
+        // Add stall if the market exists
         if (market != null) {
             market.getStalls().add(stall);
         }

@@ -6,7 +6,8 @@
     <meta charset="UTF-8">
 </head>
 <body>
-<form:form modelAttribute="stall" action="/addStall">
+<%-- Action includes the marketId parameter --%>
+<form:form modelAttribute="stall" action="/addStall?market=${marketId}">
 
     <form:label path="type">Type:</form:label>
     <form:input path="type"/>
@@ -26,8 +27,7 @@
     <form:input path="hours"/>
     <form:errors path="hours"/><br/>
 
-    <label>marketId:</label>
-    <input name="marketId"/>
+<%-- Show current market --%>
     marketId: ${marketId}
 
     <input type="submit" value="Submit">
