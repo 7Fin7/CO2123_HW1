@@ -28,6 +28,7 @@
 
     <label>marketId:</label>
     <input name="marketId"/>
+    marketId: ${marketId}
 
     <input type="submit" value="Submit">
     <form:errors/>

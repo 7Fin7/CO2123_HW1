@@ -29,22 +29,25 @@ public class StallController {
 
         if (selectedMarket != null) {
             model.addAttribute("stalls", selectedMarket.getStalls());
-            model.addAttribute("marketID", selectedMarket.getId());
+            model.addAttribute("marketId", selectedMarket.getId());
         }
         return "stalls/list";
     }
 
     @RequestMapping("/newStall")
-    public String newStall(Model model) {
+    public String newStall(Model model, @RequestParam(defaultValue = "-1") int market) {
         model.addAttribute("stall", new Stall());
+        model.addAttribute("marketId", market);
         return "stalls/form";
     }
 
     @PostMapping("/addStall")
-    public String addStall(@Valid @ModelAttribute Stall stall, BindingResult bindingResult, @RequestParam(defaultValue = "-1") int marketId) {
+    public String addStall(@Valid @ModelAttribute Stall stall, BindingResult bindingResult,
+                           @RequestParam(defaultValue = "-1", value="market") int marketId, Model model) {
 
         // On error return
         if (bindingResult.hasErrors()) {
+            model.addAttribute("marketId", marketId);
             return "stalls/form";
         }
 
